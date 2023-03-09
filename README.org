@@ -6,9 +6,8 @@
 
 We are going to implement the logistic map and the transfer operator for it.
 
-Let \(r \in [0, 4]\). The logisitic map is given by
-\begin{align}
-  \label{eq:logmap}
-  f_r &: [0, 1] \to [0, 1]\notag \\
-  x &\mapsto r \cdot x \cdot (1-x)
-\end{align}
+Let $r \in [0, 4]$. The logisitic map is given by
+
+$f_r : [0, 1] \to [0, 1]$
+
+$x \mapsto r \cdot x \cdot (1-x)$
