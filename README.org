@@ -101,6 +101,20 @@ orbit = np.array(functools.reduce(
 
 * Introduction to Transfer Operators
 
+We have our map $f_r:[0, 1] \to [0, 1]$
+
+But we want to think of densities of initial conditions. So think of a function
+\(\rho \in X([0, 1])\) where we don't want to be precise about what X is (e.g. $L^1$)
+
+What happens under one iteration of \(f_r\)? Answer is the /Frobenius-Perron operator/ $T$
+
+A$(T\rho)(y) := \int\limits_0^1 \delta(y - f_r(x)) \rho(x)\mathrm{d}x$
+
+One common trick: $\delta(g(x)) = \sum\limits_{x_0: g(x_0) = 0} \frac{1}{|g'(x_0)|}\delta(x - x_0)$
+
+For us this means:
+$(T\rho)(y) = \sum\limits_{x_0: f_r(x_0) = y}\int\limits_{0}^{1} \frac{1}{|f_r'(x_0)|}\delta(x - x_0)\rho(x)\mathrm{d}x$
+
 ** TODO Transfer Operator for the Logistic Map
 
 ** TODO Implementation
