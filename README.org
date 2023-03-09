@@ -127,7 +127,7 @@ $(T\rho)(y) = \rho(f_r^{-1}(y)) = (\rho\circ f_r^{-1})(y)$
 ** Transfer Operator for the Logistic Map
 Our aim now is to implement
 $(T\rho)(y) = \sum\limits_{x_0: f_r(x_0) = y} \frac{1}{|f_r'(x_0)|}\rho(x_0)$
-#+begin_src python :session :results output raw
+#+begin_src python :session :results output raw :exports both
 def const_density(x):
     """
     Return the constant density
