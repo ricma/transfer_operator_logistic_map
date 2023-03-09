@@ -14,3 +14,30 @@ Let $r \in [0, 4]$. The logisitic map is given by
 $f_r : [0, 1] \to [0, 1]$
 
 $x \mapsto r \cdot x \cdot (1-x)$
+
+A python implementation would look like this:
+#+begin_src python :session :export code
+def logistic_map(r, x):
+    """
+    Returns the next value for the logistic map with parameter r.
+
+    fᵣ(x) = r·x·(1 - x)
+
+    Paramters
+    ---------
+    r : double
+        Parameter of the logistic map, r∈[0, 4]
+    x : double or ndarray
+        points to evaluate fᵣ(x) at
+
+    Returns
+    -------
+    fx : double or ndarray
+        values of fᵣ(x)
+    """
+    return r * x * (1 - x)
+#+end_src
+
+#+RESULTS:
+
+We can use it iteratively …
