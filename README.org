@@ -41,13 +41,12 @@ def logistic_map(r, x):
 #+RESULTS:
 
 We can use it iteratively:
-#+begin_src python :session :export code :results output raw
+#+begin_src python :session :export both :results output raw table
 import functools
 r = 3.54
 x = 0.45
 
 f_r = functools.partial(logistic_map, r)
-print(f"Using r={r} in the logistic map\n")
 print("| iter | value |\n|---|")
 for j in range(5):
     print(f"| {j: 4d} | {x: .7f} |")
@@ -56,8 +55,6 @@ print("")
 #+end_src
 
 #+RESULTS:
-Using r=3.54 in the logistic map
-
 | iter |     value |
 |------+-----------|
 |    0 | 0.4500000 |
