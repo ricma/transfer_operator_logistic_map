@@ -119,10 +119,53 @@ This means:
 $(T\rho)(y) = \sum\limits_{x_0: f_r(x_0) = y} \frac{1}{|f_r'(x_0)|}\rho(x_0)$
 
 *Side Note*: If $f_r$ would be _bijective_ then we could simplify the above to:
+Using $x_0 = f_r^{-1}(y)$:
 $(T\rho)(y) = \frac{1}{|f_r'(f_r^{-1}(y))|}\rho(f_r^{-1}(y))$
 Furthermore, if the mapping would be volume preserving (in other words, the Jacobian is 1), then
 $(T\rho)(y) = \rho(f_r^{-1}(y)) = (\rho\circ f_r^{-1})(y)$
 
-** TODO Transfer Operator for the Logistic Map
+** Transfer Operator for the Logistic Map
+Our aim now is to implement
+$(T\rho)(y) = \sum\limits_{x_0: f_r(x_0) = y} \frac{1}{|f_r'(x_0)|}\rho(x_0)$
+#+begin_src python :session
+def const_density(x):
+    """
+    Return the constant density
+    """
+    return np.ones_like(x)
+
+
+def transfer_operator_logistic_map(r, rho):
+    """
+    Return Tρ for logistic map at r
+    """
+
+    def mapped_density(y):
+        """
+        Value of (Tρ)(y)
+        """
+        # someone gives you a y
+        if y >= r / 4:
+            # no zeros
+            return 0.0
+        else:
+            # 0 = -x(1-x) + y/r = x² - x + y/r
+            # ½ ± √(¼ - y / r)
+            x_1 = 0.5 + np.sqrt(0.25 - y / r)
+            x_2 = 0.5 - np.sqrt(0.25 - y / r)
+
+            # dfᵣ / dx = d(rx - rx²)/dx =  r - 2·x·r
+            df_r1 = r - 2 * x_1 * r
+            df_r2 = r - 2 * x_2 * r
+
+            return rho(x_1) / abs(df_r1) + rho(x_2) / abs(df_r2)
+
+    return mapped_density
+
+# Try a few iterations:
+# note: for r = 3.54, the max is at 0.885
+# Trho(0.885 + 1e-9)
+# Trho(0.885 - 1e-9)
+#+end_src
 
 ** TODO Implementation
