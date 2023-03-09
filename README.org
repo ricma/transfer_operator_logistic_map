@@ -40,17 +40,40 @@ def logistic_map(r, x):
 
 #+RESULTS:
 
+A plot of the function can be seen here:
+#+begin_src python :session :exports results :results output raw
+import matplotlib.pyplot as plt
+import numpy as np
+import functools
+
+r = 3.54
+f_r = functools.partial(logistic_map, r)
+
+x = np.linspace(0, 1, 30)
+fig, ax = plt.subplots(1, 1)
+ax.set_xlabel(r"$x$")
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+ax.set_title(f"Logistic map $f_{{{r}}}$")
+ax.plot(x, f_r(x), c="C0")
+ax.plot([0, 1], [0, 1], c="C0", ls="--")
+
+filename = "figures/example_logistic_map.svg"
+fig.savefig(filename, transparent=True)
+print(f"[[file:{filename}]]")
+#+end_src
+
+#+RESULTS:
+[[file:figures/example_logistic_map.svg]]
+
 We can use it iteratively:
 #+begin_src python :session :export both :results output raw table
-import functools
-r = 3.54
-x = 0.45
-
-f_r = functools.partial(logistic_map, r)
+x_0 = 0.45
 print("| iter | value |\n|---|")
 for j in range(5):
-    print(f"| {j: 4d} | {x: .7f} |")
-    x = f_r(x)
+    print(f"| {j: 4d} | {x_0: .7f} |")
+    # update the value
+    x_0 = f_r(x_0)
 print("")
 #+end_src
 
