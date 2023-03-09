@@ -86,9 +86,20 @@ print("")
 |    3 | 0.8374721 |
 |    4 | 0.4818385 |
 
-** TODO Using ~reduce~ to Iterate the Map
+** Using ~reduce~ to Iterate the Map
 
-* TODO Introduction to Transfer Operators
+#+begin_src python :session
+x_0 = 0.45
+
+# You can use reduce for repeated function evaluation
+orbit = np.array(functools.reduce(
+    lambda result, next_item: result + [f_r(result[-1])],
+    range(10), [x_0]))
+#+end_src
+
+#+RESULTS:
+
+* Introduction to Transfer Operators
 
 ** TODO Transfer Operator for the Logistic Map
 
