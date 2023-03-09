@@ -1,6 +1,9 @@
 #+AUTHOR: Martin Richter
 #+email: martin.richter@nottingham.ac.uk
 #+date: [2023-03-09 Thu 13:00-14:00]
+#+STARTUP: showall inlineimages latexpreview entitiesplain hideblocks
+#+OPTIONS: ^:nil toc:nil
+#+OPTIONS: tex:dvipng  # HTML export with pngs rather than MathJax
 
 * Outlook
 
