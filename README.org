@@ -127,7 +127,7 @@ $(T\rho)(y) = \rho(f_r^{-1}(y)) = (\rho\circ f_r^{-1})(y)$
 ** Transfer Operator for the Logistic Map
 Our aim now is to implement
 $(T\rho)(y) = \sum\limits_{x_0: f_r(x_0) = y} \frac{1}{|f_r'(x_0)|}\rho(x_0)$
-#+begin_src python :session
+#+begin_src python :session :results output raw
 def const_density(x):
     """
     Return the constant density
@@ -175,7 +175,22 @@ Trho = transfer_operator_logistic_map(r, const_density)
 # Trho(0.885 + 1e-9)
 # Trho(0.885 - 1e-9)
 
-print(Trho(np.array([0.4, 0.5, 0.9])))
+# print(Trho(np.array([0.4, 0.5, 0.9])))
+
+x = np.linspace(0, 1, 350)
+
+Trho2 = transfer_operator_logistic_map(r, Trho)
+Trho3 = transfer_operator_logistic_map(r, Trho2)
+Trho4 = transfer_operator_logistic_map(r, Trho3)
+plt.grid(True)
+plt.xlabel("$x$")
+plt.plot(x, Trho4(x))
+filename = f"figures/example_plot_T_operator_r={r:07.4f}.svg"
+plt.savefig(filename, transparent=True)
+print(f"[[file:{filename}]]")
 #+end_src
+
+#+RESULTS:
+[[file:figures/example_plot_T_operator_r=03.5400.svg]]
 
 ** TODO Implementation
