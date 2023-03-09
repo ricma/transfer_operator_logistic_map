@@ -85,3 +85,11 @@ print("")
 |    2 | 0.3841296 |
 |    3 | 0.8374721 |
 |    4 | 0.4818385 |
+
+** TODO Using ~reduce~ to Iterate the Map
+
+* TODO Introduction to Transfer Operators
+
+** TODO Transfer Operator for the Logistic Map
+
+** TODO Implementation
