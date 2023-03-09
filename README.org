@@ -143,29 +143,39 @@ def transfer_operator_logistic_map(r, rho):
     def mapped_density(y):
         """
         Value of (Tρ)(y)
+
+        Parameters
+        ----------
+        y : ndarray
+            points to evaluate Tρ at
         """
-        # someone gives you a y
-        if y >= r / 4:
-            # no zeros
-            return 0.0
-        else:
-            # 0 = -x(1-x) + y/r = x² - x + y/r
-            # ½ ± √(¼ - y / r)
-            x_1 = 0.5 + np.sqrt(0.25 - y / r)
-            x_2 = 0.5 - np.sqrt(0.25 - y / r)
+        results = np.zeros_like(y)
+        where_valid = (y < r / 4)
+        valid_y = y[where_valid]
 
-            # dfᵣ / dx = d(rx - rx²)/dx =  r - 2·x·r
-            df_r1 = r - 2 * x_1 * r
-            df_r2 = r - 2 * x_2 * r
+        # 0 = -x(1-x) + y/r = x² - x + y/r
+        # ½ ± √(¼ - y / r)
+        x_1 = 0.5 + np.sqrt(0.25 - valid_y / r)
+        x_2 = 0.5 - np.sqrt(0.25 - valid_y / r)
 
-            return rho(x_1) / abs(df_r1) + rho(x_2) / abs(df_r2)
+        # dfᵣ / dx = d(rx - rx²)/dx =  r - 2·x·r
+        df_r1 = r - 2 * x_1 * r
+        df_r2 = r - 2 * x_2 * r
+
+        results[where_valid] += (
+            rho(x_1) / abs(df_r1) + rho(x_2) / abs(df_r2))
+
+        return results
 
     return mapped_density
 
 # Try a few iterations:
 # note: for r = 3.54, the max is at 0.885
+Trho = transfer_operator_logistic_map(r, const_density)
 # Trho(0.885 + 1e-9)
 # Trho(0.885 - 1e-9)
+
+print(Trho(np.array([0.4, 0.5, 0.9])))
 #+end_src
 
 ** TODO Implementation
